@@ -1,5 +1,5 @@
 - name: Check if Swarm was created
-  command: docker info --format '{{.Swarm.LocalNodeState}}'
+  command: 'docker info --format "{{.Swarm.LocalNodeState}}"'
   register: swarm_status
 
 - name: Init a new swarm
