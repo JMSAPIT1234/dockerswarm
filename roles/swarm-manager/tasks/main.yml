@@ -1,4 +1,4 @@
 - name: Init a new swarm
-  docker_swarm:
-    state: present
-    advertise_addr: 10.0.0.174
+  command: docker swarm init --advertise-addr {{ inventory_hostname }}
+
+
