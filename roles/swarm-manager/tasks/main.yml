@@ -1,4 +1,4 @@
 - name: Init a new swarm with default parameters
   docker_swarm:
     state: present
-    advertise_addr: {{ inventory_hostname }}
+    advertise_addr: "{{ inventory_hostname }}"
