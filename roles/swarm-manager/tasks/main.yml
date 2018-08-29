@@ -1,5 +1,10 @@
+- name: Check if Swarm was created
+  command: docker info --format '{{.Swarm.LocalNodeState}}'
+  register: swarm_status
+
 - name: Init a new swarm
   command: docker swarm init --advertise-addr {{ inventory_hostname }}
+  when: swarm_status.stdout!=active
 
 - name: Get Worker Token
   command: docker swarm join-token worker -q
