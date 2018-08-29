@@ -1,6 +1,9 @@
 - name: Check if Swarm was created
   shell: "docker info | grep 'Swarm: active' | wc -l"
   register: swarm_status
+  
+- name: Show Swarm Statuss Token
+  debug: var=swarm_status.stdout
 
 - name: Init a new swarm
   command: docker swarm init --advertise-addr {{ inventory_hostname }}
