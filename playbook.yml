@@ -1,0 +1,24 @@
+---
+- name: Pre-requisite configuration and Docker Engine setup
+  hosts: all
+  become_user: root
+  become: true
+
+  roles:
+    - docker
+
+- name: Setup Swarm cluster on Management nodes
+  hosts: manager
+  become_user: root
+  become: true
+
+  roles:
+    - swarm-manager
+
+- name: Setup Swarm cluster on worker nodes
+  hosts: worker
+  become_user: root
+  become: true
+
+  roles:
+    - swarm-worker

@@ -1,0 +1,33 @@
+- name: install wget
+  yum:
+    name: wget
+    state: latest
+    
+- name: download docker-ce package
+  get_url:
+    url: https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-17.03.2.ce-1.el7.centos.x86_64.rpm
+    dest: /home/ec2-user
+ 
+- name: download docker-ce selinux
+  get_url:
+    url: https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch.rpm 
+    dest: /home/ec2-user
+
+- name: install docker-ce-selinux
+  yum:
+    name: /home/ec2-user/docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch.rpm 
+    state: present
+    
+- name: install docker-ce-centos
+  yum:
+    name: /home/ec2-user/docker-ce-17.03.2.ce-1.el7.centos.x86_64.rpm
+    state: present
+    
+- name: Start docker service, if not running
+  service:
+    name: docker
+    state: started
+    enabled: yes
+    
+    
+  
