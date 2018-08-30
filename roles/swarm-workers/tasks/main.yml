@@ -1,15 +1,5 @@
 - name: Join Swarm Cluster
-  vars:
-    token: "{{ hostvars[groups['manager'][0]]['worker_token']['stdout'] }}"
-    manager1: "{{ hostvars[groups['manager'][0]]['inventory_hostname'] }}"
-   
-- name: Join Swarm Cluster as Workers
-  command: docker swarm join --token {{ token }} {{ manager1 }}:2377
-  register: worker
-      
-- name: Show Results
-  debug: var=worker.stdout
-  
-- name: Show Errors
-  debug: var=worker.stderr
-
+  shell: "docker swarm join --token {{ hostvars['manager']['worker_token']['stdout'] }} {{ hostvars['manager']['ansible_eth0']['ipv4']['address'] }}:2377"
+  when: "docker_info.stdout.find('Swarm: inactive') != -1"
+  retries: 3
+  delay: 20
