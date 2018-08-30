@@ -26,6 +26,7 @@
 - name: Check if the nodes are active - manager
   hosts: manager
   become_user: root
+  become: true
   tasks:
   
     - name: Check if the nodes are active
