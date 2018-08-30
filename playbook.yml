@@ -35,3 +35,6 @@
 
     - name: Show Nodes Status
       debug: var=node_status.stdout
+    
+    - name: run docker-compose.yml
+      shell: "docker stack deploy -c docker-compose.yml adop"
