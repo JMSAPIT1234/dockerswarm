@@ -7,3 +7,10 @@
   when: swarm_status.stdout!="1"
   retries: 3
   delay: 20
+  
+- name: Check if the nodes are active
+  shell: "docker node ls"
+  register: node_status
+
+- name: Show Nodes Status
+  debug: var=node_status.stdout
