@@ -1,21 +1,30 @@
-version: '3.1'
+version: '3.2'
 
 networks:
   adop_network:
     driver: overlay
 
-- name: added portainer
-    shell: "docker volume create portainer_data"
+volumes:
+  portainer_data:
     
 services:
   portainer:
     image: portainer
+    volumes:
+      - type: volume
+        source: portainer_data
+        target: /data
+        volume:
+          nocopy: false
+      - type: bind
+        source: //var/run/docker.sock
+        target: /var/run/docker.sock
     deploy:
       replicas: 1
     networks:
       - adop_network
     ports:
-      - "9000:9000"
+      - "80:9000"
  
   jenkins:
     image: jenkins
@@ -34,3 +43,4 @@ services:
       - adop_network
     ports:
       - "9092:9092"
+      - "9000:9000"
