@@ -11,4 +11,4 @@
     dest: /home/ec2-user/docker-compose.yml
     
 - name: run docker-compose.yml
-  shell: "docker stack deploy -c /home/ec2-user/docker-compose.yml adop"
+  shell: "docker stack deploy -c docker-compose.yml adop"
