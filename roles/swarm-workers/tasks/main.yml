@@ -2,14 +2,14 @@
   vars:
     token: "{{ hostvars[groups['manager'][0]]['worker_token']['stdout'] }}"
     manager1: "{{ hostvars[groups['manager'][0]]['inventory_hostname'] }}"
-  tasks:
-    - name: Join Swarm Cluster as Workers
-      command: docker swarm join --token {{ token }} {{ manager1 }}:2377
-      register: worker
+   
+- name: Join Swarm Cluster as Workers
+  command: docker swarm join --token {{ token }} {{ manager1 }}:2377
+  register: worker
       
-    - name: Show Results
-      debug: var=worker.stdout
-
-    - name: Show Errors
-      debug: var=worker.stderr
+- name: Show Results
+  debug: var=worker.stdout
+  
+- name: Show Errors
+  debug: var=worker.stderr
 
