@@ -9,10 +9,10 @@
   command: docker swarm init --advertise-addr {{ inventory_hostname }}
   when: swarm_status.stdout!="1"
 
-- name: Get Master Token
-  command: docker swarm join-token master -q
-  register: master_token
+- name: Get Worker Token
+  command: docker swarm join-token worker -q
+  register: worker_token
   
-- name: Show Master Token
-  debug: var=master_token.stdout
+- name: Show Worker Token
+  debug: var=worker_token.stdout
 
