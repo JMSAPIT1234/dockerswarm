@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 networks:
   adop_network:
@@ -9,18 +9,14 @@ volumes:
     
 services:
   portainer:
-    image: portainer
+    image: portainer/portainer
     volumes:
-      - type: volume
-        source: portainer_data
-        target: /data
-        volume:
-          nocopy: false
-      - type: bind
-        source: //var/run/docker.sock
-        target: /var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
     deploy:
       replicas: 1
+      placement:
+        constraints: [node.role == manager]
     networks:
       - adop_network
     ports:
