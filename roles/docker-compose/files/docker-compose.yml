@@ -1,0 +1,14 @@
+networks:
+  adop_network:
+    driver: overlay
+    
+services:
+  nginx:
+    image: nginx:alpine
+    deploy:
+      replicas: 1
+    networks:
+      - adop_network
+    ports:
+      - "80:80"
+      

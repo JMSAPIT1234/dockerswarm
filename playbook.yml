@@ -27,14 +27,6 @@
   hosts: manager
   become_user: root
   become: true
-  tasks:
   
-    - name: Check if the nodes are active
-      shell: "docker node ls"
-      register: node_status
-
-    - name: Show Nodes Status
-      debug: var=node_status.stdout
-    
-    - name: run docker-compose.yml
-      shell: "docker stack deploy -c docker-compose.yml adop"
+  roles:
+    - docker-compose
