@@ -6,6 +6,7 @@ networks:
     
 services:
   portainer:
+    shell: "docker volume create portainer_data"
     image: portainer
     deploy:
       replicas: 1
