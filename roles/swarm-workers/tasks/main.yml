@@ -3,7 +3,7 @@
   register: swarm_status
 
 - name: Join Swarm Cluster
-  shell: "docker swarm join --token {{ hostvars['manager']['worker_token']['stdout'] }} {{ hostvars[groups['manager'][0]]['inventory_hostname'] }}:2377"
+  shell: "docker swarm join --token={{ hostvars['manager']['worker_token']['stdout'] }} {{ hostvars['manager']['ansible_eth0']['ipv4']['address'] }}:2377"
   when: swarm_status.stdout!="1"
   retries: 3
   delay: 20
