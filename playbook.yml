@@ -14,3 +14,11 @@
 
   roles:
     - swarm-manager
+    
+- name: Setup Swarm cluster on Workers
+  hosts: worker
+  become_user: root
+  become: true
+
+  roles:
+    - swarm-workers
