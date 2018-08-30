@@ -4,6 +4,11 @@
 
 - name: Show Nodes Status
   debug: var=node_status.stdout
- 
+
+- name: Copy docker-compose into home directory
+  copy:
+    src: ../files/docker-compose.yml
+    dest: /home/ec2-user/docker-compose.yml
+    
 - name: run docker-compose.yml
-  shell: "docker stack deploy -c ../files/docker-compose.yml adop"
+  shell: "docker stack deploy -c /home/ec2-user/docker-compose.yml adop"
