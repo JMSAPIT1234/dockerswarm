@@ -5,12 +5,29 @@ networks:
     driver: overlay
     
 services:
-  nginx:
-    image: nginx:alpine
+  portainer:
+    image: portainer
     deploy:
       replicas: 1
     networks:
       - adop_network
     ports:
-      - "80:80"
+      - "9000:9000"
+ 
+  jenkins:
+    image: jenkins
+    deploy:
+      replicas: 1
+    networks:
+      - adop_network
+    ports:
+      - "8080:8080"
       
+  sonarqube:
+    image: sonarqube
+    deploy:
+      replicas: 1
+    networks:
+      - adop_network
+    ports:
+      - "9092:9092"
